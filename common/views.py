@@ -6,7 +6,7 @@ from datetime import datetime, timedelta
 from django.db.models import Sum
 from django.shortcuts import render
 from .models import Book, Author
-from .utils import dict_reformat
+from .utils import dict_reformat, dict_delta
 
 
 def main(request):
@@ -88,8 +88,30 @@ def third_algorithms(request):
         'family status': 'married'
     }
     context['reformat'] = dict_reformat(sample_data)
-    return render(request, 'tasks/algorithms.html', context)
 
+    sample_data1 = {
+        'company:persons:working': '10',
+        'company:persons:leave': '2',
+        'company:budget': '200000',
+        'products': '10',
+        'brands:own': 2,
+        'brands:other': 23
+    }
+
+    sample_data2 = {
+        'company:persons:working': '11',
+        'company:persons:leave': '3',
+        'company:budget': '201000',
+        'company:worked days': 265,
+        'products': '10',
+        'brands:own': 2,
+        'brands:other': 23,
+        'rebrands': 8,
+    }
+
+    context['delta'] = dict_delta(sample_data1, sample_data2)
+
+    return render(request, 'tasks/algorithms.html', context)
 
 
 def fourth_orm_task(request):
@@ -99,3 +121,37 @@ def fourth_orm_task(request):
     authors_values = Author.objects.annotate(pages_sum=Sum('books_set__pages_count')).values('name', 'pages_sum')
     context['task'] = [{d['name']:d['pages_sum']} for d in authors_values]
     return render(request, 'tasks/orm_task.html', context=context)
+
+
+def fives_extra(request):
+    def search_p(a_list):
+        '''
+        :param a_list: list
+        :return: p_list: list 
+        '''
+        p_list = list()
+        for index, number in enumerate(a_list):
+            '''
+             -1 [0] + 3 [1] + -4 [2] = (=-2| 5 [3]) = 1 [4] + -6 [5] + 2 [6] + 1 [7]
+             
+            0 [0] [!-1!, 3, -4, 5, 1, -6, 2, 1]
+            1 [-1] [!3!, -4, 5, 1, -6, 2, 1]
+            2 [-1, 3] [!-4!, 5, 1, -6, 2, 1]
+            3 [-1, 3, -4] [!5!, 1, -6, 2, 1]
+            4 [-1, 3, -4, 5] [!1!, -6, 2, 1]
+            5 [-1, 3, -4, 5, 1] [!-6!, 2, 1]
+            6 [-1, 3, -4, 5, 1, -6] [!2!, 1]
+            7 [-1, 3, -4, 5, 1, -6, 2] [!1!]
+            '''
+            left_list = [0, ] if index == 0 else a_list[:index]
+            right_list_sum = sum(a_list[index:])
+            if sum(left_list) == right_list_sum - number:
+                p_list.append(index)
+        return p_list if p_list else [-1]
+
+    context = dict()
+    context['a_list'] = [-1, 3, -4, 5, 1, -6, 2, 1]
+    context['p_test_list'] = [1, 3, 7]
+    context['p_list'] = search_p(context['a_list'])
+
+    return render(request, 'tasks/extra_task.html', context)

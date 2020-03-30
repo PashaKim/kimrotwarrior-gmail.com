@@ -1,5 +1,9 @@
 
 def dict_reformat(orig_d):
+    '''
+    :param orig_d: dict
+    :return: reformat_d: dict
+    '''
     reformat_d = dict()
 
     def cell(parent, child, value):
@@ -21,3 +25,19 @@ def dict_reformat(orig_d):
                     except KeyError:
                         reformat_d[key] = value
     return reformat_d
+
+
+def dict_delta(dict_1, dict_2):
+    '''
+    :param dict_1: dict
+    :param dict_2: dict
+    :return: delta_d: dict
+    '''
+    delta_d = dict()
+    for key, value in dict_1.items():
+        if key in dict_2:
+            try:
+                delta_d[key] = int(dict_1[key]) - (dict_2[key])
+            except TypeError:
+                pass
+    return delta_d
