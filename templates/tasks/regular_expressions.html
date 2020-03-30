@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block title %}Regular expressions{% endblock %}
+
+{% block content %}
+    <div class="jumbotron">
+        <div class="container">
+            <h1>Second task: Regular expressions!</h1>
+        </div>
+    </div>
+    <div class="container">
+    <p>Write a regular expression to search for an IP address in the text.</p>
+        <ul><li>{{ ip_list }}</li></ul>
+    <p>Write a regular expression to search for the domain name in the URL.</p>
+        <ul><li>{{ url_list }}</li></ul>
+    <p>Using the regular expression from the previous job, replace all the domains in url_samples with example.org
+        while keeping the rest of the URL</p>
+        <ul><li>{{ url_replace }}</li></ul>
+    </div>
+{% endblock %}

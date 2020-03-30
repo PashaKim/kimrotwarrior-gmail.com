@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+
+    <!-- Main jumbotron for a primary marketing message or call to action -->
+    <div class="jumbotron">
+        <div class="container">
+            <h1 class="display-3">Hello!</h1>
+            <h4>Thanks for the five interesting tasks. I will wait for an answer as soon as possible.</h4>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- Example row of columns -->
+        <div class="row">
+            <div class="col-md-4">
+                <h2>1) Warm-up</h2>
+                <p>1.1. create three lists of the following elements; 1.2. using the slicing operation (array slice);
+                    1.3. get a general list of all three, excluding duplicates; 1.4. get unique and common elements
+                    for two lists of numbers; 1.5. get the sum of list items from numbers;...
+                </p>
+                <p><a class="btn btn-secondary" href="{% url 'common:warm_up' %}" role="button">View details &raquo;</a></p>
+            </div>
+            <div class="col-md-4">
+                <h2>2) Regular expressions</h2>
+                <p>Write a regular expression to search for an IP address in the text.
+                    Write a regular expression to search for the domain name in the URL.
+                    Using the regular expression from the previous job, replace all the domains in url_samples with
+                    example.org while keeping the rest of the URL</p>
+                <p><a class="btn btn-secondary" href="{% url 'common:regular_expressions' %}" role="button">View details &raquo;</a></p>
+            </div>
+            <div class="col-md-4">
+                <h2>3) Algorithms</h2>
+                <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula
+                    porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh,
+                    ut fermentum massa justo sit amet risus.</p>
+                <p><a class="btn btn-secondary" href="{% url 'common:algorithms' %}" role="button">View details &raquo;</a></p>
+            </div>
+            <div class="col-md-4">
+                <h2>4) ORM task </h2>
+                <p> We have 2 models. Author is a writer model. Book is a model with books written by writers. You need
+                    to write the optimal query using Django ORM to count the number of written pages by each author.</p>
+                <p><a class="btn btn-secondary" href="{% url 'common:orm_task' %}" role="button">View details &raquo;</a></p>
+            </div>
+            <div class="col-md-4">
+                <h2>Heading</h2>
+                <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula
+                    porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh,
+                    ut fermentum massa justo sit amet risus.</p>
+                <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>
+            </div>
+        </div>
+
+        <hr>
+
+    </div> <!-- /container -->
+{% endblock %}
