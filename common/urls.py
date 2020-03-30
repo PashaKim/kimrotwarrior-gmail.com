@@ -1,5 +1,5 @@
 from django.urls import path
-from common.views import main, first_warm_up, second_regular_expressions, third_algorithms, fourth_orm_task
+from common.views import main, first_warm_up, second_regular_expressions, third_algorithms, fourth_orm_task, fives_extra
 
 app_name = 'common'
 urlpatterns = [
@@ -8,4 +8,5 @@ urlpatterns = [
     path('regular_expressions/', second_regular_expressions, name='regular_expressions'),
     path('algorithms/', third_algorithms, name='algorithms'),
     path('orm_task/', fourth_orm_task, name='orm_task'),
+    path('extra_task/', fives_extra, name='extra_task'),
 ]
