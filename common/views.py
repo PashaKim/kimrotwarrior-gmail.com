@@ -1,3 +1,4 @@
+import re
 import string
 from random import randint
 from datetime import datetime, timedelta
@@ -57,6 +58,20 @@ def first_warm_up(request):
     context['1_12'] = {'now': datetime.now(), 'yesterday': datetime.now() - timedelta(days=1)}
 
     return render(request, 'tasks/warm_up.html', context=context)
+
+
+def second_regular_expressions(request):
+    context = dict()
+    ip_samples = ['\t\nSome text 127.0.0.1 GET ....\n4 127.0.0.2 8888 GET ....\n',
+                  'google.com has address 216.58.209.174\r\ngoogle.com mail is handled by 20 alt1.aspmx.l.google.com.',
+                  ]
+    context['ip_list'] = re.findall('\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}', r' '.join(ip_samples))
+    url_samples = ['http://api.facebook.com/user/56', 'http://api.FaceBook.Com',
+                   'https://facebook.com', 'https://sub.sub.sub.example.com:8000/user/photo/56/',
+                   ]
+    context['url_list'] = re.findall(r'https?://([a-zA-Z\.]+)', r' '.join(url_samples))
+    context['url_replace'] = (re.sub(r'//([a-zA-Z\.]+)', '//example.org', r' '.join(url_samples))).split(' ')
+    return render(request, 'tasks/regular_expressions.html', context)
 
 
 def fourth_orm_task(request):
