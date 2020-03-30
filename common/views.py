@@ -2,10 +2,12 @@ import string
 from random import randint
 from datetime import datetime, timedelta
 from django.shortcuts import render
+from .models import Book, Author
 
 
 def main(request):
     return render(request, 'main.html', {})
+
 
 def first_warm_up(request):
     context = dict()
@@ -54,3 +56,9 @@ def first_warm_up(request):
 
     return render(request, 'tasks/warm_up.html', context=context)
 
+
+def fourth_orm_task(request):
+    context = dict()
+    context['books'] = Book.objects.prefetch_related('author').all()
+    context['authors'] = Author.objects.all()
+    return render(request, 'tasks/orm_task.html', context=context)
