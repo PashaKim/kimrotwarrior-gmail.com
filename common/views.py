@@ -6,6 +6,7 @@ from datetime import datetime, timedelta
 from django.db.models import Sum
 from django.shortcuts import render
 from .models import Book, Author
+from .utils import dict_reformat
 
 
 def main(request):
@@ -72,6 +73,23 @@ def second_regular_expressions(request):
     context['url_list'] = re.findall(r'https?://([a-zA-Z\.]+)', r' '.join(url_samples))
     context['url_replace'] = (re.sub(r'//([a-zA-Z\.]+)', '//example.org', r' '.join(url_samples))).split(' ')
     return render(request, 'tasks/regular_expressions.html', context)
+
+
+def third_algorithms(request):
+    context = dict()
+    sample_data = {
+        'person:name': 'Guido',
+        'person:fullname': 'Guido van Rossum',
+        'person:department:title': 'Python developers',
+        'person:department:post:title': 'chief',
+        'person:department:post:since': '2013-01-01',
+        'person:department:post:till': 'now',
+        'address:country': 'Nederland, USA',
+        'family status': 'married'
+    }
+    context['reformat'] = dict_reformat(sample_data)
+    return render(request, 'tasks/algorithms.html', context)
+
 
 
 def fourth_orm_task(request):
