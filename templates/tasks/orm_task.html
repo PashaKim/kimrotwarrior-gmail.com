@@ -10,18 +10,19 @@
     </div>
 
     <div class="container">
-     <p>
-        У нас есть 2 модели. Author - модель писателей. Book - модель с книгами написанными писателями.
-         Нужно написать оптимальный запрос посредством Django ORM для подсчета кол-ва написанных страниц каждым автором.
-         Результат достаточно вывести в виде словаря (ключ - имя автора, значение общая сумма страниц), пример: {'Author 1': 30,
-        'Author 2': 40, 'Author 3': 15}
-    </p>
-    <p style="color: forestgreen">{{ task }}</p>
+        <p>
+            We have 2 models. Author is a writer model. Book is a model with books written by writers.<br>
+            You need to write the optimal query using Django ORM to count the number of written pages by each
+            author.<br>
+            It is enough to output the result in the form of a dictionary (the key is the name of the author,
+            the value is the total amount of pages), example: <br>{'Author 1': 30, 'Author 2': 40, 'Author 3': 15}
+        </p>
+        <p style="color: forestgreen">{{ task }}</p>
         <h3>Authors:</h3>
         <div class="row">
             {% for author in authors %}
                 <div class="col-md-4">
-                    <h5>{{ author.name }}</h5>
+                    <h4>{{ author.name }}</h4>
                     <p>pages: {{ author.pages }}</p>
                 </div>
             {% endfor %}
