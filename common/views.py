@@ -1,6 +1,8 @@
 import string
 from random import randint
 from datetime import datetime, timedelta
+
+from django.db.models import Sum
 from django.shortcuts import render
 from .models import Book, Author
 
@@ -61,4 +63,6 @@ def fourth_orm_task(request):
     context = dict()
     context['books'] = Book.objects.prefetch_related('author').all()
     context['authors'] = Author.objects.all()
+    authors_values = Author.objects.annotate(pages_sum=Sum('books_set__pages_count')).values('name', 'pages_sum')
+    context['task'] = [{d['name']:d['pages_sum']} for d in authors_values]
     return render(request, 'tasks/orm_task.html', context=context)

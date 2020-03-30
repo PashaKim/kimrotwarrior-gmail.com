@@ -16,16 +16,17 @@
          Результат достаточно вывести в виде словаря (ключ - имя автора, значение общая сумма страниц), пример: {'Author 1': 30,
         'Author 2': 40, 'Author 3': 15}
     </p>
-        <p>Authors:</p>
+    <p style="color: forestgreen">{{ task }}</p>
+        <h3>Authors:</h3>
         <div class="row">
-            {% for book in books %}
+            {% for author in authors %}
                 <div class="col-md-4">
-                    <h5>{{ book.title }}</h5>
-                    <p>{{ book.author }}, pages: {{ book.pages_count }}</p>
+                    <h5>{{ author.name }}</h5>
+                    <p>pages: {{ author.pages }}</p>
                 </div>
             {% endfor %}
         </div>
-        <p>Books:</p>
+        <h3>Books:</h3>
         <div class="row">
             {% for book in books %}
                 <div class="col-md-4">
