@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block title %}ORM{% endblock %}
+
+{% block content %}
+    <div class="jumbotron">
+        <div class="container">
+            <h1>Fourth task: ORM!</h1>
+        </div>
+    </div>
+
+    <div class="container">
+     <p>
+        У нас есть 2 модели. Author - модель писателей. Book - модель с книгами написанными писателями.
+         Нужно написать оптимальный запрос посредством Django ORM для подсчета кол-ва написанных страниц каждым автором.
+         Результат достаточно вывести в виде словаря (ключ - имя автора, значение общая сумма страниц), пример: {'Author 1': 30,
+        'Author 2': 40, 'Author 3': 15}
+    </p>
+        <p>Authors:</p>
+        <div class="row">
+            {% for book in books %}
+                <div class="col-md-4">
+                    <h5>{{ book.title }}</h5>
+                    <p>{{ book.author }}, pages: {{ book.pages_count }}</p>
+                </div>
+            {% endfor %}
+        </div>
+        <p>Books:</p>
+        <div class="row">
+            {% for book in books %}
+                <div class="col-md-4">
+                    <h5>{{ book.title }}</h5>
+                    <p>{{ book.author }}, pages: {{ book.pages_count }}</p>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}
