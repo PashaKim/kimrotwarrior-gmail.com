@@ -6,7 +6,7 @@ from datetime import datetime, timedelta
 from django.db.models import Sum
 from django.shortcuts import render
 from .models import Book, Author
-from .utils import dict_reformat
+from .utils import dict_reformat, dict_delta
 
 
 def main(request):
@@ -88,8 +88,30 @@ def third_algorithms(request):
         'family status': 'married'
     }
     context['reformat'] = dict_reformat(sample_data)
-    return render(request, 'tasks/algorithms.html', context)
 
+    sample_data1 = {
+        'company:persons:working': '10',
+        'company:persons:leave': '2',
+        'company:budget': '200000',
+        'products': '10',
+        'brands:own': 2,
+        'brands:other': 23
+    }
+
+    sample_data2 = {
+        'company:persons:working': '11',
+        'company:persons:leave': '3',
+        'company:budget': '201000',
+        'company:worked days': 265,
+        'products': '10',
+        'brands:own': 2,
+        'brands:other': 23,
+        'rebrands': 8,
+    }
+
+    context['delta'] = dict_delta(sample_data1, sample_data2)
+
+    return render(request, 'tasks/algorithms.html', context)
 
 
 def fourth_orm_task(request):
